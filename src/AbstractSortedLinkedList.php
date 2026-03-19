@@ -44,6 +44,39 @@ abstract class AbstractSortedLinkedList
         $current->next = $new;
     }
 
+    public function removeNode(mixed $data): void
+    {
+        if ($this->head === null) {
+            return;
+        }
+
+        if ($this->head->data === $data) {
+            $this->head = $this->head->next;
+        }
+
+        $current = $this->head;
+        while ($current !== null && $current->next !== null && $this->compare($current->next->data, $data)) {
+            if ($current->next->data === $data) {
+                $current->next = $current->next->next;
+
+                // remove only one node for duplicates
+                break;
+            }
+            $current = $current->next;
+        }
+    }
+
+    public function reverse(): static
+    {
+        $reversedList = new static(!$this->desc);
+        $current = $this->head;
+        while ($current !== null) {
+            $reversedList->addNode($current->data);
+            $current = $current->next;
+        }
+        return $reversedList;
+    }
+
     public function toArray(): array
     {
         if ($this->head === null) {
@@ -62,9 +95,9 @@ abstract class AbstractSortedLinkedList
     public function compare(mixed $left, mixed $right): bool
     {
         if ($this->desc) {
-            return $left > $right;
+            return $left >= $right;
         }
 
-        return $left < $right;
+        return $left <= $right;
     }
 }

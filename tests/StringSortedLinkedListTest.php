@@ -97,6 +97,47 @@ class StringSortedLinkedListTest extends TestCase
         $this->whenAddingIncompatibleNode(67);
     }
 
+    public function testRemoving(): void
+    {
+        $this->givenEmptyList();
+        $this->whenAddingNode('apple');
+        $this->whenAddingNode('orange');
+        $this->whenAddingNode('banana');
+        $this->whenAddingNode('grape');
+        $this->whenAddingNode('avocado');
+        $this->whenAddingNode('grape');
+        $this->whenRemovingNode('grape');
+        $this->thenExpectListArrayOutput(['apple', 'avocado', 'banana', 'grape', 'orange']);
+    }
+
+    public function testRemovingFromEmptyList(): void
+    {
+        $this->givenEmptyList();
+        $this->whenRemovingNode('grape');
+        $this->thenExpectListArrayOutput([]);
+    }
+
+    public function testRemovingNonExistingNode(): void
+    {
+        $this->givenEmptyList();
+        $this->whenAddingNode('apple');
+        $this->whenRemovingNode('grape');
+        $this->thenExpectListArrayOutput(['apple']);
+    }
+
+    public function testReversing(): void
+    {
+        $this->givenEmptyList();
+        $this->whenAddingNode('apple');
+        $this->whenAddingNode('orange');
+        $this->whenAddingNode('banana');
+        $this->whenAddingNode('grape');
+        $this->whenAddingNode('avocado');
+        $this->whenAddingNode('grape');
+        $this->whenReversed();
+        $this->thenExpectListArrayOutput(['orange', 'grape', 'grape', 'banana', 'avocado', 'apple']);
+    }
+
     private function givenEmptyList(): void
     {
         $this->list = StringSortedLinkedList::create();
@@ -112,9 +153,19 @@ class StringSortedLinkedListTest extends TestCase
         $this->list->addNode($data);
     }
 
+    private function whenRemovingNode(string $string): void
+    {
+        $this->list->removeNode($string);
+    }
+
     private function whenAddingIncompatibleNode(int $data): void
     {
         $this->list->addNode($data);
+    }
+
+    public function whenReversed(): void
+    {
+        $this->list = $this->list->reverse();
     }
 
     private function thenExpectListArrayOutput(array $expected): void
