@@ -45,6 +45,38 @@ var_dump($list->toArray());
 // ['orange', 'banana', 'apple']
 ```
 
+## Available Methods
+
+- `addNode(int|string $data): void`
+- `removeNode(int|string $data): void` (removes first matching node)
+- `toArray(): array`
+- `reverse(): static` (returns a new list with opposite order)
+- `mergeWith(self $listToMerge): static` (merges and keeps sorting)
+
+```php
+<?php
+
+use Acme\SortedLinkedList\IntSortedLinkedList;
+
+$list = IntSortedLinkedList::create();
+$list->addNode(3);
+$list->addNode(1);
+$list->addNode(2);
+$list->removeNode(2);
+
+$reversed = $list->reverse();
+
+$other = IntSortedLinkedList::create();
+$other->addNode(7);
+$other->addNode(0);
+
+$merged = $list->mergeWith($other);
+
+var_dump($list->toArray());     // [0, 1, 3, 7]
+var_dump($reversed->toArray()); // [3, 1]
+var_dump($merged->toArray());   // [0, 1, 3, 7]
+```
+
 ## Run Tests
 
 ```bash
