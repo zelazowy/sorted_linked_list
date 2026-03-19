@@ -62,9 +62,16 @@ $list = IntSortedLinkedList::create();
 $list->addNode(3);
 $list->addNode(1);
 $list->addNode(2);
+
+var_dump($list->toArray());     // [1, 2, 3]
+
 $list->removeNode(2);
 
+var_dump($list->toArray());     // [1, 3]
+
 $reversed = $list->reverse();
+
+var_dump($reversed->toArray()); // [3, 1]
 
 $other = IntSortedLinkedList::create();
 $other->addNode(7);
@@ -72,8 +79,6 @@ $other->addNode(0);
 
 $merged = $list->mergeWith($other);
 
-var_dump($list->toArray());     // [0, 1, 3, 7]
-var_dump($reversed->toArray()); // [3, 1]
 var_dump($merged->toArray());   // [0, 1, 3, 7]
 ```
 
