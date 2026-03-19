@@ -62,7 +62,7 @@ abstract class AbstractSortedLinkedList
     public function compare(mixed $left, mixed $right): bool
     {
         if ($this->desc) {
-            return $left >= $right;
+            return $left > $right;
         }
 
         return $left < $right;

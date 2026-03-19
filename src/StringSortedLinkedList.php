@@ -3,14 +3,13 @@
 namespace Acme\SortedLinkedList;
 
 use Acme\SortedLinkedList\Exception\InvalidNodeTypeException;
-use InvalidArgumentException;
 
-class IntAbstractSortedLinkedList extends AbstractSortedLinkedList
+class StringSortedLinkedList extends AbstractSortedLinkedList
 {
     public function addNode(mixed $data): void
     {
-        if (!is_int($data)) {
-            throw InvalidNodeTypeException::for($data, 'int');
+        if (!is_string($data)) {
+            throw InvalidNodeTypeException::for($data, 'string');
         }
 
         parent::addNode($data);
