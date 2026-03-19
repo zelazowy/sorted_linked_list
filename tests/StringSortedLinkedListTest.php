@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 class StringSortedLinkedListTest extends TestCase
 {
     private StringSortedLinkedList $list;
+    private StringSortedLinkedList $newList;
 
     public function testAddingSingleNode(): void
     {
@@ -52,8 +53,8 @@ class StringSortedLinkedListTest extends TestCase
         $this->givenEmptyList();
         $this->whenAddingNode('apple');
         $this->whenAddingNode('banana');
-        $this->whenAddingNode('cherry');
-        $this->thenExpectListArrayOutput(['apple', 'banana', 'cherry']);
+        $this->whenAddingNode('zebra');
+        $this->thenExpectListArrayOutput(['apple', 'banana', 'zebra']);
     }
 
     public function testPolish(): void
@@ -138,9 +139,33 @@ class StringSortedLinkedListTest extends TestCase
         $this->thenExpectListArrayOutput(['orange', 'grape', 'grape', 'banana', 'avocado', 'apple']);
     }
 
+    public function testMerging(): void
+    {
+        $this->givenEmptyList();
+        $this->whenAddingNode('apple');
+        $this->whenAddingNode('orange');
+        $this->whenAddingNode('banana');
+        $this->andGivenNewListWith(['john', 'wick']);
+        $this->whenMerging();
+        $this->thenExpectListArrayOutput(['apple', 'banana', 'john', 'orange', 'wick']);
+    }
+
     private function givenEmptyList(): void
     {
         $this->list = StringSortedLinkedList::create();
+    }
+
+    private function andGivenNewListWith(array $nodes): void
+    {
+        $this->newList = StringSortedLinkedList::create();
+        foreach ($nodes as $node) {
+            $this->newList->addNode($node);
+        }
+    }
+
+    private function whenMerging(): void
+    {
+        $this->list = $this->list->mergeWith($this->newList);
     }
 
     private function givenDescOrderedEmptyList(): void

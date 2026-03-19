@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 class IntSortedLinkedListTest extends TestCase
 {
     private IntSortedLinkedList $list;
+    private IntSortedLinkedList $newList;
 
     public function testAddingSingleItem(): void
     {
@@ -127,6 +128,17 @@ class IntSortedLinkedListTest extends TestCase
         $this->thenExpectListArrayOutput([5, 4, 4, 3, 2, 1]);
     }
 
+    public function testMerging(): void
+    {
+        $this->givenEmptyList();
+        $this->whenAddingItem(1);
+        $this->whenAddingItem(5);
+        $this->whenAddingItem(4);
+        $this->andGivenNewListWith([2, 9]);
+        $this->whenMerging();
+        $this->thenExpectListArrayOutput([1, 2, 4, 5, 9]);
+    }
+
     private function givenEmptyList(): void
     {
         $this->list = IntSortedLinkedList::create();
@@ -135,6 +147,19 @@ class IntSortedLinkedListTest extends TestCase
     private function givenDescendingEmptyList(): void
     {
         $this->list = IntSortedLinkedList::create(desc: true);
+    }
+
+    private function andGivenNewListWith(array $nodes): void
+    {
+        $this->newList = IntSortedLinkedList::create();
+        foreach ($nodes as $node) {
+            $this->newList->addNode($node);
+        }
+    }
+
+    private function whenMerging(): void
+    {
+        $this->list = $this->list->mergeWith($this->newList);
     }
 
     private function whenAddingItem(int $data): void

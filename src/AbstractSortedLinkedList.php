@@ -2,6 +2,8 @@
 
 namespace Acme\SortedLinkedList;
 
+use Acme\SortedLinkedList\Exception\InvalidListTypeException;
+
 abstract class AbstractSortedLinkedList
 {
     private ?Node $head = null;
@@ -75,6 +77,21 @@ abstract class AbstractSortedLinkedList
             $current = $current->next;
         }
         return $reversedList;
+    }
+
+    public function mergeWith(self $listToMerge): static
+    {
+        if ($listToMerge::class !== static::class) {
+            throw InvalidListTypeException::withExpected(static::class, $listToMerge::class);
+        }
+
+        $toAdd = $listToMerge->head;
+        while ($toAdd !== null) {
+            $this->addNode($toAdd->data);
+            $toAdd = $toAdd->next;
+        }
+
+        return $this;
     }
 
     public function toArray(): array
