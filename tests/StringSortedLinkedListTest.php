@@ -3,12 +3,12 @@
 namespace Acme\Tests;
 
 use Acme\SortedLinkedList\Exception\InvalidNodeTypeException;
-use Acme\SortedLinkedList\StringSortedLinkedList;
+use Acme\SortedLinkedList\StringAbstractSortedLinkedList;
 use PHPUnit\Framework\TestCase;
 
 class StringSortedLinkedListTest extends TestCase
 {
-    private StringSortedLinkedList $list;
+    private StringAbstractSortedLinkedList $list;
 
     public function testAddingSingleNode(): void
     {
@@ -98,12 +98,12 @@ class StringSortedLinkedListTest extends TestCase
 
     private function givenEmptyList(): void
     {
-        $this->list = StringSortedLinkedList::create();
+        $this->list = StringAbstractSortedLinkedList::create();
     }
 
     private function givenDescOrderedEmptyList(): void
     {
-        $this->list = StringSortedLinkedList::create(desc: true);
+        $this->list = StringAbstractSortedLinkedList::create(desc: true);
     }
 
     private function whenAddingNode(string $data): void

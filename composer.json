@@ -20,8 +20,5 @@
       "name": "Krzysztof Jończyk",
       "email": "krzysztof.jonczyk@gmail.com"
     }
-  ],
-  "require": {
-    "illuminate/collections": "^13.1"
-  }
+  ]
 }

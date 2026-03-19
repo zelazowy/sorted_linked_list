@@ -2,7 +2,7 @@
 
 namespace Acme\SortedLinkedList;
 
-abstract class SortedLinkedList
+abstract class AbstractSortedLinkedList
 {
     private ?Node $head = null;
 
@@ -34,6 +34,7 @@ abstract class SortedLinkedList
 
         $current = $this->head;
 
+        // find the right place to insert
         while ($current->next !== null && $this->compare($current->next->data, $new->data)) {
             $current = $current->next;
         }

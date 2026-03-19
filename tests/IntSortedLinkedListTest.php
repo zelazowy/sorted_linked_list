@@ -3,12 +3,12 @@
 namespace Acme\Tests;
 
 use Acme\SortedLinkedList\Exception\InvalidNodeTypeException;
-use Acme\SortedLinkedList\IntSortedLinkedList;
+use Acme\SortedLinkedList\IntAbstractSortedLinkedList;
 use PHPUnit\Framework\TestCase;
 
 class IntSortedLinkedListTest extends TestCase
 {
-    private IntSortedLinkedList $list;
+    private IntAbstractSortedLinkedList $list;
 
     public function testAddingSingleItem(): void
     {
@@ -89,12 +89,12 @@ class IntSortedLinkedListTest extends TestCase
 
     private function givenEmptyList(): void
     {
-        $this->list = IntSortedLinkedList::create();
+        $this->list = IntAbstractSortedLinkedList::create();
     }
 
     private function givenDescendingEmptyList(): void
     {
-        $this->list = IntSortedLinkedList::create(desc: true);
+        $this->list = IntAbstractSortedLinkedList::create(desc: true);
     }
 
     private function whenAddingItem(int $data): void

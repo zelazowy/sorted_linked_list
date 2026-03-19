@@ -5,7 +5,7 @@ namespace Acme\SortedLinkedList;
 use Acme\SortedLinkedList\Exception\InvalidNodeTypeException;
 use InvalidArgumentException;
 
-class StringSortedLinkedList extends SortedLinkedList
+class StringAbstractSortedLinkedList extends AbstractSortedLinkedList
 {
     public function addNode(mixed $data): void
     {

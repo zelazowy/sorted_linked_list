@@ -20,9 +20,9 @@ composer install
 ```php
 <?php
 
-use Acme\SortedLinkedList\IntSortedLinkedList;
+use Acme\SortedLinkedList\IntAbstractSortedLinkedList;
 
-$list = IntSortedLinkedList::create(); // ascending
+$list = IntAbstractSortedLinkedList::create(); // ascending
 $list->addNode(5);
 $list->addNode(1);
 $list->addNode(4);
@@ -34,9 +34,9 @@ var_dump($list->toArray());
 ```php
 <?php
 
-use Acme\SortedLinkedList\StringSortedLinkedList;
+use Acme\SortedLinkedList\StringAbstractSortedLinkedList;
 
-$list = StringSortedLinkedList::create(desc: true); // descending
+$list = StringAbstractSortedLinkedList::create(desc: true); // descending
 $list->addNode('apple');
 $list->addNode('orange');
 $list->addNode('banana');
