@@ -1,0 +1,27 @@
+{
+  "name": "acme/sorted_linked_list",
+  "description": "Sorted linked list package",
+  "type": "library",
+  "require-dev": {
+    "phpunit/phpunit": "^13.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Acme\\SortedLinkedList\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Acme\\Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Krzysztof Jończyk",
+      "email": "krzysztof.jonczyk@gmail.com"
+    }
+  ],
+  "require": {
+    "illuminate/collections": "^13.1"
+  }
+}
